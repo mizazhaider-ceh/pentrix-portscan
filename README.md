@@ -3,8 +3,20 @@
 [![Python 3.8+](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Dependencies](https://img.shields.io/badge/dependencies-zero-brightgreen.svg)](#install)
+[![Stars](https://img.shields.io/github/stars/mizazhaider-ceh/pentrix-portscan.svg)](https://github.com/mizazhaider-ceh/pentrix-portscan/stargazers)
+[![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/mizazhaider-ceh/pentrix-portscan/pulls)
 
 Fast async TCP port scanner with banner grabbing and service hints. Pure Python standard library, no pip packages needed.
+
+## Table of Contents
+
+- [Features](#features)
+- [Screenshots](#screenshots)
+- [Install](#install)
+- [Usage](#usage)
+- [Options](#options)
+- [Ethical use](#ethical-use)
+- [License](#license)
 
 ## Features
 
@@ -14,6 +26,22 @@ Fast async TCP port scanner with banner grabbing and service hints. Pure Python 
 - **Flexible port selection**: single ports (`80,443`), ranges (`1-1000`), or the built-in `top100` list. Mix them freely.
 - **Clean output**: readable console report plus optional `-o` file output.
 - **Sensible errors**: clear messages for unresolvable hosts and invalid port specs, with documented exit codes.
+
+## Screenshots
+
+Banner grabbing against a local test server:
+
+![Scan with banner grabbing](docs/images/scan-results.png)
+
+A wide sweep with no open ports:
+
+![Scan with no open ports](docs/images/scan-no-open-ports.png)
+
+Built-in help:
+
+![Help output](docs/images/help.png)
+
+All screenshots show real runs on `127.0.0.1`.
 
 ## Install
 
@@ -43,10 +71,10 @@ python3 portscan.py 127.0.0.1 -p 7995-8005 --banner --timeout 0.5 -o scan.txt
 Scanning 127.0.0.1 (127.0.0.1): 11 port(s), timeout 0.5s, banner grabbing on
 
 pentrix-portscan report for 127.0.0.1 (127.0.0.1)
-Open ports: 1 of 11 scanned in 0.01s
+Open ports: 1 of 11 scanned in 0.02s
 
 PORT       SERVICE        BANNER
-8000/tcp   http-alt       HTTP/1.0 200 OK / Server: SimpleHTTP/0.6 Python/3.12.3 / Date: Fri, 02 Oct 2026 11:30:48 GMT
+8000/tcp   http-alt       HTTP/1.0 200 OK / Server: SimpleHTTP/0.6 Python/3.12.3 / Date: Fri, 02 Oct 2026 11:46:09 GMT
 
 Report written to scan.txt
 ```
@@ -63,7 +91,7 @@ python3 portscan.py 127.0.0.1 -p 1-500 --timeout 0.5
 Scanning 127.0.0.1 (127.0.0.1): 500 port(s), timeout 0.5s
 
 pentrix-portscan report for 127.0.0.1 (127.0.0.1)
-Open ports: 0 of 500 scanned in 1.07s
+Open ports: 0 of 500 scanned in 1.02s
 
 No open ports found.
 ```
@@ -74,7 +102,7 @@ Mix port selections:
 python3 portscan.py example.com -p 22,80,443,8000-8100,top100 --banner
 ```
 
-### Options
+## Options
 
 ```
 usage: portscan.py [-h] [-p PORTS] [--timeout SECONDS] [--banner] [-c N]
